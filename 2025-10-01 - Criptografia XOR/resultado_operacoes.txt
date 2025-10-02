@@ -1,9 +1,0 @@
-Resultados das operações bit a bit (bitwise) com strings
-
-Texto 1................: Programação
-Texto 2................: desenvolver
-
-
-Texto_1 & Texto_2......: @`ceb`m`fab
-Texto_1 | Texto_2......: twg~wom÷ç
-Texto_1 ^ Texto_2......: 4
