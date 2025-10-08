@@ -43,12 +43,12 @@ TAG_NUMBER  = {
 # --------------------------------------------------------------------------------
 # Dicionário que mapeia os códigos dos formatos de dados para seus significados
 DATA_FORMAT = {
-   0x0100: 'Unsigned Byte'    , 0x0200: 'ASCII String', 
-   0x0300: 'Unsigned Short'   , 0x0400: 'Unsigned Long', 
-   0x0500: 'Unsigned Rational', 0x0600: 'Signed Byte', 
-   0x0700: 'Undefinied'       , 0x0800: 'Signed Short', 
-   0x0900: 'Signed Long'      , 0x1000: 'Signed Rational', 
-   0x1100: 'Single Float'     , 0x1200: 'Double Float'
+   0x0001: 'Unsigned Byte'    , 0x0002: 'ASCII String', 
+   0x0003: 'Unsigned Short'   , 0x0004: 'Unsigned Long', 
+   0x0005: 'Unsigned Rational', 0x0006: 'Signed Byte', 
+   0x0007: 'Undefinied'       , 0x0008: 'Signed Short', 
+   0x0009: 'Signed Long'      , 0x000A: 'Signed Rational', 
+   0x000b: 'Single Float'     , 0x000c: 'Double Float'
 }
 
 # --------------------------------------------------------------------------------
