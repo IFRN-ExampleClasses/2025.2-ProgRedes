@@ -1,4 +1,4 @@
-import requests, json, os
+import requests, sys, os
 
 # Obtendo o diretório atual
 strDirAtual = os.path.dirname(__file__)
@@ -13,11 +13,11 @@ try:
    # Fazendo a requisição GET
    response = requests.get(strURL, headers=dicHeaders)
 except requests.exceptions.ConnectTimeout:
-   print(f'\nERRO: A conexão demorou demais (Timeout). O servidor pode estar offline ou lento...\n')
+   sys.exit(f'\nERRO: A conexão demorou demais (Timeout). O servidor pode estar offline ou lento...\n')
 except requests.exceptions.RequestException as e:
-   print(f'\nERRO: Ocorreu um erro ao fazer a requisição: {e}\n')
+   sys.exit(f'\nERRO: Ocorreu um erro ao fazer a requisição: {e}\n')
 except Exception as e:
-   print(f'\nERRO: {e}\n')
+   sys.exit(f'\nERRO: {e}\n')
 else:
    # ----------------------------------------------------------------------
    # Exibindo o código de status HTTP
