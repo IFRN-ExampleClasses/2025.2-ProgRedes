@@ -4,7 +4,7 @@ import requests, sys, os
 strDirAtual = os.path.dirname(__file__)
 
 # Definindo a URL para fazer a requisição
-strURL = 'http://www.globo.com'
+strURL = 'http://www.tribunadonorte.com.br'
 
 # Definindo os cabeçalhos HTTP
 dicHeaders = { 'User-Agent': 'MeuAppPython/1.0' }
@@ -32,6 +32,7 @@ else:
    # Exibindo o tipo de conteúdo
    strContentType = response.headers.get('Content-Type', '')
    print(f'Tipo de conteúdo ..........: {strContentType}')  
+   
    # ----------------------------------------------------------------------
    # Exibindo o conteúdo da resposta
    print('\nConteúdo da resposta HTTP:')
