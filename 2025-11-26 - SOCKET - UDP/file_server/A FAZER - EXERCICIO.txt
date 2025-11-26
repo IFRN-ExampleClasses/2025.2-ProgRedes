@@ -1,0 +1,4 @@
+Elaborar um cliente (UDP) que informe o nome do arquivo e o servidor (UDO) envie para o 
+cliente o arquivo solicitado. 
+
+Apresentar: 01/12/2025

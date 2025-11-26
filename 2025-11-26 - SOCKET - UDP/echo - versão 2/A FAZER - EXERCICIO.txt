@@ -1,0 +1,4 @@
+Ajustar o cliente e o servidor para, sem alterar o tamanho do buffer (BUFFER_SIZE),
+para eles poderem receber mensagens acima do tamanho pré-definido na constante BUFFER_SIZE
+
+Apresentar: 01/12/2025
