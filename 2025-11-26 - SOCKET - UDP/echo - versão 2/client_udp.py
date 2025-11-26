@@ -32,6 +32,10 @@ while True:
    sockClient.sendto(strMensagem.encode(CODE_PAGE), TUPLA_SERVER)
 
    # Recebendo resposta do servidor
+   bytesMensagemRetorno, tuplaCliente = sockClient.recvfrom(BUFFER_SIZE)
+   intTamanhoMensagem = int(bytesMensagemRetorno.decode(CODE_PAGE))
+   if intTamanhoMensagem > BUFFER_SIZE: BUFFER_SIZE = intTamanhoMensagem
+
    bytesMensagemRetorno, tuplaOrigem = sockClient.recvfrom(BUFFER_SIZE)
    strNomeHost = socket.gethostbyaddr(tuplaOrigem[0])[0].split('.')[0].upper()
    print(f'{tuplaOrigem} -> {strNomeHost}: {bytesMensagemRetorno.decode(CODE_PAGE)}')
