@@ -40,8 +40,14 @@ try:
          strMensagem = byteMensagem.decode(CODE_PAGE)
          print(f'{tuplaCliente} -> {strNomeHost}: {strMensagem}')
 
+         strMensagem = strMensagem[::-1].encode(CODE_PAGE)
+
+         # Enviando o tamanho da mensagem ao servidor
+         bytesTamanhoMensagem = str(len(strMensagem)).encode(CODE_PAGE)
+         sockServer.sendto(bytesTamanhoMensagem, tuplaCliente)
+         
          # Devolvendo uma mensagem ao cliente
-         sockServer.sendto(strMensagem[::-1].encode(CODE_PAGE), tuplaCliente)
+         sockServer.sendto(strMensagem, tuplaCliente)
 
 except KeyboardInterrupt:
    print('\nAVISO: Foi Pressionado CTRL+C...\nSaindo do Servidor...\n\n')
