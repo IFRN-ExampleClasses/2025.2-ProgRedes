@@ -26,35 +26,56 @@ try:
    
    while True:
       try:
-         # Recebendo solicitações do cliente (fragmentos)
-         byteFragmento, tuplaCliente = sockServer.recvfrom(constantes.BUFFER_SIZE)        
+         # Recebendo solicitações do cliente
+         byteMensagem, tuplaCliente = sockServer.recvfrom(constantes.BUFFER_SIZE)
+         strMensagemCliente = byteMensagem.decode(constantes.CODE_PAGE).lower().strip()       
       except socket.timeout:
          continue
-      else: 
-        # Abrindo o arquivo para a enviar ao cliente
-        strNomeArquivo = byteFragmento.decode(constantes.CODE_PAGE)
-        print (f'Recebi pedido para o arquivo: {strNomeArquivo}')
-        try:
-           arqEnvio = open (f'{constantes.DIR_IMG_SERVER}\\{strNomeArquivo}', 'rb')
-        except FileNotFoundError:
-           print (f'Arquivo não encontrado: {strNomeArquivo}\n')
-           strMensagemErro = 'ERRO: Arquivo não encontrado.'.encode(constantes.CODE_PAGE)
-           sockServer.sendto(strMensagemErro, tuplaCliente)
-           continue
-        except Exception as strErro:
-           print (f'Erro ao abrir o arquivo: {strErro}\n')
-           strMensagemErro = f'ERRO: {strErro}'.encode(constantes.CODE_PAGE)
-           sockServer.sendto(strMensagemErro, tuplaCliente)
-           continue
-        else:
-           # Lendo o conteúdo do arquivo para enviar ao cliente
-           print (f'Enviando arquivo: {strNomeArquivo}')
-           sockServer.sendto(b'OK', tuplaCliente)
-           fileData = arqEnvio.read(4096)
-           sockServer.sendto(fileData, tuplaCliente)
+      else:
+         # Exibindo quando um novo cliente se conecta
+         if strMensagemCliente.startswith(chr(175)): 
+            print(f'NOVA CONEXÃO.....: Cliente {tuplaCliente[0]} se conectou...')
+            continue
 
-        # Fechando o arquivo
-        arqEnvio.close()
+         # Exibindo quando um cliente se desconecta
+         if strMensagemCliente == 'sair':      
+            print(f'FIM DA CONEXÃO...: Cliente {tuplaCliente[0]} se desconectou...')             
+            continue
+
+         # Abrindo o arquivo para a enviar ao cliente
+         strNomeArquivo = strMensagemCliente
+         print(f'{tuplaCliente} solicitou o arquivo: {strNomeArquivo}... ', end=' ')
+         try:
+            arqEnvio = open(f'{constantes.DIR_IMG_SERVER}\\{strNomeArquivo}', 'rb')
+         except FileNotFoundError:
+            print('ERRO: Arquivo não encontrado')
+            strMensagemErro = 'ERRO: Arquivo não encontrado.'.encode(constantes.CODE_PAGE)
+            sockServer.sendto(b'ERRO', tuplaCliente)
+            sockServer.sendto(strMensagemErro, tuplaCliente)
+            continue
+         except Exception as strErro:
+            print(f'ERRO: {strErro}')
+            strMensagemErro = f'ERRO: {strErro}'.encode(constantes.CODE_PAGE)
+            sockServer.sendto(b'ERRO', tuplaCliente)
+            sockServer.sendto(strMensagemErro, tuplaCliente)
+            continue
+         else:
+            # Obtendo o tamanho do arquivo
+            intTamanhoArquivo = os.path.getsize(f'{constantes.DIR_IMG_SERVER}\\{strNomeArquivo}')
+            intBytesEnviados  = 0
+            # Lendo o conteúdo do arquivo para enviar ao cliente
+            print(f'Enviando arquivo..')
+            while intBytesEnviados < intTamanhoArquivo:
+               fileData = arqEnvio.read(constantes.BUFFER_SIZE)
+               sockServer.sendto(fileData, tuplaCliente)
+               intBytesEnviados += len(fileData)
+
+         # Enviando a mensagem de EOF (End Of File) para o cliente        
+         print(f'Arquivo {strNomeArquivo} enviado com sucesso para {tuplaCliente}!')
+         sockServer.sendto(b'EOF', tuplaCliente)
+         
+         # Fechando o arquivo
+         arqEnvio.close()
 
 except KeyboardInterrupt:
    print('\nAVISO.........: Foi Pressionado CTRL+C...\nSaindo do Servidor...\n\n')
