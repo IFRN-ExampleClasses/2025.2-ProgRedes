@@ -1,1 +1,0 @@
-Neste diretório serão salvos os arquivos enviados ao cliente.
