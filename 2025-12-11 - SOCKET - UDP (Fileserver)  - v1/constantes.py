@@ -3,10 +3,10 @@ import os, socket
 
 # --------------------------------------------------------------------------------
 # Definindo o IP do servidor para os clientes
-HOST_IP_SERVER  = socket.gethostbyname(socket.gethostname())
+HOST_IP_SERVER  = 'INFORME AQUI O IP DO SERVIDOR'
 
 # Obtendo o IP do cliente
-HOST_IP_CLIENT  = socket.gethostbyname(socket.gethostname())
+HOST_IP_CLIENT  = 'INFORME AQUI O IP DO CLIENTE'
 
 # Definindo a porta
 HOST_PORT       = 50000           
