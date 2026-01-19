@@ -32,6 +32,6 @@ while True:
    # Converte a resposta para JSON
    jsonRetorno = reqURL.json()
 
-   # Exibe a mensagem
+   # Exibe as mensagens recebidas
    print(f'{jsonRetorno}')
    print('-'*100+'\n')
