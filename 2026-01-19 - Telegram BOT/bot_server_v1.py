@@ -29,6 +29,9 @@ while True:
    if not reqURL.status_code == 200:
       sys.exit('\nERRO: Erro ao acessar a URL\nCÓDIGO DE RETORNO: ' + str(reqURL.status_code))
 
+   # Verifica se não há mensagens
+   if reqURL.json()['result'] == []: continue
+
    # Converte a resposta para JSON
    jsonRetorno = reqURL.json()
 
