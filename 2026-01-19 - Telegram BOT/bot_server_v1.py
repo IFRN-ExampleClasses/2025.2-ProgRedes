@@ -28,13 +28,13 @@ while True:
 
    # Verifica se a requisição não foi bem sucedida
    if not reqURL.status_code == 200:
-      sys.exit('\nERRO: Erro ao acessar a URL\nCÓDIGO DE RETORNO: ' + str(reqURL.status_code))
+      sys.exit(f'\nERRO: Erro ao acessar a URL\nCÓDIGO DE RETORNO: {reqURL.status_code}')
 
    # Verifica se não há mensagens
    if reqURL.json()['result'] == []: continue
 
    # Converte a resposta para JSON
-   jsonRetorno = reqURL.json()
+   jsonRetorno = reqURL.text
 
    # Obtém o ID da última mensagem da Requisição
    intIDMensagemAtual = jsonRetorno['result'][-1]['message']['message_id']
