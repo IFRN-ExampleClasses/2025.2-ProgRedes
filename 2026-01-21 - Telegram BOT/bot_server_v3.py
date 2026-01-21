@@ -48,6 +48,7 @@ while True:
    # Atualiza o ID da última mensagem
    intIDUltimaMensagem = intIDMensagemAtual
    
+   # Obtendo a última mensagen recebida
    strMensagem = jsonRetorno["result"][-1]["message"]["text"]
    print(f'Mensagem recebida {intIDUltimaMensagem}: {strMensagem}')
    
