@@ -1,4 +1,4 @@
-import os, sys, requests, platform
+import os, sys, requests, platform, json
 
 '''
     Deve ser criado um arquivo com o nome token_bot.py
@@ -36,7 +36,7 @@ while True:
    if reqURL.json()['result'] == []: continue
 
    # Converte a resposta para JSON
-   jsonRetorno = reqURL.json()
+   jsonRetorno = json.loads(reqURL.text)
 
    # Obtém o ID da última mensagem da Requisição
    intIDMensagemAtual = jsonRetorno["result"][-1]["message"]["message_id"]
